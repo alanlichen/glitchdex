@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Glitchdex API Docs</title>
+	<link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json" />
+	<meta name="description" content="official nodeJS api documentation for Glitchdex" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="Glitchdex" property="og:site_name">
+	<meta name="theme-color" content="#FF0000">
+	<meta name="author" content="Team ViewSelect">
+	<meta content='https://i.ibb.co/Pw5v7gg/3d4cc78920abfdfb88d6f9292bbef719.webp' property='og:image'>
+	<link rel='icon' href='https://i.ibb.co/Pw5v7gg/3d4cc78920abfdfb88d6f9292bbef719.webp' type='image/x-icon'>
+	<link rel='icon' href='https://i.ibb.co/Pw5v7gg/3d4cc78920abfdfb88d6f9292bbef719.webp' />
+	<link rel="stylesheet" href="./style.css?Version=0.0.1">
+	<!-- Prism Syntax Highlighter -->
+	<link href="./Prism.css?Version=0.0.1" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="Blur"></div>
+	<section class="Content">
+		<img src='https://i.ibb.co/Pw5v7gg/3d4cc78920abfdfb88d6f9292bbef719.webp' alt="Glitchdex Logo" class="Logo">
+      <h1 class="Title Text_Center">API Documentation for nodeJS</h1>
+      <div class="Grid">
+        <div class="Subject">
+          <h2 class="Header Text_Center">get started &darr; &darr; &darr;</h2>
+          <p class="Paragraph">GlitchDex Can Be Installed Via NPM</p>
+          <div class="Btn" onclick="window.location.href='https://www.npmjs.com/package/glitchdex'"><span>Visit To NPM</span></div>
+          <code class="Text_Center language-javascript">
+            const glitchdex = require('glitchdex');
+          </code>
+        </div>
+        <div class="Subject">
+          <h2 class="Header Text_Center">Search Entries &darr; &darr; &darr;</h2>
+          <code class="Text_Center language-javascript">
+     console.log(await glitchdex.search(/^[^\d]+$/));
+          </code>
+        </div>
+        <div class="Subject">
+         <h2 class="Header Text_Center">Find Entries &darr; &darr; &darr;</h2>
+        <code class="Text_Center language-javascript">
+      console.log(await glitchdex.find('entryname'));
+        </code>
+        </div>
+        <div class="Subject">
+          <h2 class="Header Text_Center">Get All Entries &darr; &darr; &darr;</h2>
+          <code class="Text_Center language-javascript">
+      console.log(await glitchdex.entries());
+          </code>
+        </div>
+      </div>
+    </section>
+    <!-- Syntax Highlighter -->
+    <script src="./Prism.js?Version=0.0.1"></script>
+  </body>
+</html>

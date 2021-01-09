@@ -1,0 +1,167 @@
+/* Css Vars */
+:root {
+  /* Titles */
+  --Title-Size: 2rem;
+  --Title-Color: #00ffff;
+
+  /* Header */
+  --Header-Size: 1.5em;
+  --Header-Color: #00ffff;
+  /* Code Blocks */
+  --Code-Bg: #222;
+  --code-Font-Side: 1em;
+  --body-color: #222;
+  /* Button */
+  --Btn-BG: #00ffff;
+}
+@media screen and (max-width: 650px) {
+  :root {
+    /* Titles */
+    --Title-Size: 1.5rem;
+    /* Header */
+    --Header-Size: 1.5em;
+    /* Code Blocks */
+    --code-Font-Side: 1em;
+  }
+  .Subject {
+    width: max-content;
+    grid-template-areas: 
+      'Header Header'
+      'Text Text'
+      'Code Code';
+  }
+  .Btn {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  :root {
+    /* Titles */
+    --Title-Size: 1.25rem;
+    /* Header */
+    --Header-Size: 1rem;
+    /* Code Blocks */
+    --code-Font-Side: .75rem;
+  }
+  .Subject {
+    width: 100%;
+  }
+  .Btn {
+    display: none;
+  }
+}
+@media screen and (max-width: 400px) {
+  :root {
+    /* Titles */
+    --Title-Size: 1rem;
+    /* Header */
+    --Header-Size: .75rem;
+    /* Code Blocks */
+    --code-Font-Side: .5rem;
+  }
+  .Subject {
+    width: 100%;
+
+  }
+  .Btn {
+    display: none;
+  }
+}
+/* There Is The Body */
+html {
+  width: 100vw;
+  height: 100vh;
+}
+body, .Content, html  {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: var(--body-color);
+  position: absolute;
+  overflow-x: none;
+}
+/* The Content */
+.Content {
+  position: absolute;
+  z-index: 2;
+}
+.Logo {
+  position: absolute;
+  border-radius: 50%;
+  width: 15%;
+  right: 0;
+  top: 0;
+}
+/* Text Size */
+.Title {
+  font-size: var(--Title-Size);
+  color: var(--Title-Color);
+  margin-left: 20px !important;
+  margin: .5em;
+}
+.Header {
+  font-size: var(--Header-Size);
+  color: var(--Header-Color);
+  grid-area: Header;
+}
+.Paragraph {
+  grid-area: Text;
+  color: #00eeee;
+  font-size: 1rem;
+}
+/* Text AlignMents */
+.Text_Center {
+  text-align: left;
+}
+/* Components */
+.Btn > span {
+  align-self: center;
+}
+.Btn {
+  padding: 1em 2em;
+  border-radius: 5px;
+  background: var(--Btn-BG);
+  width: max-content;
+  grid-area: Btn;
+  display: flex;
+}
+.Btn:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+/* Holds The Stuff */
+.Grid {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto, min-content);
+}
+.Subject {
+  min-height: max-content;
+  height: 100%;
+  padding: 1%;
+  margin-left: 20px !important;
+  margin: .5em;
+  display: grid;
+  min-width: max-content;
+  /* Account For Padding And Margin */
+  width: calc(100% - 2% - .5em - 20px);
+  grid-template-rows: 1/3;
+  grid-template-columns: calc(auto + 10%) min-content;
+  grid-template-areas: 
+  'Header Header'
+  'Text Text'
+  'Code Btn';
+}
+code {
+  background-color: var(--Code-Bg) !important;
+  text-align: center;
+  font-size: var(--code-Font-Side);
+  border-radius: 1rem !important;
+  border: 3px solid cyan !important;
+  padding: 10px !important;
+  width: 100% !important;
+  grid-area: Code;
+}
