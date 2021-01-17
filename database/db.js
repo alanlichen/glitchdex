@@ -1,4 +1,4 @@
-const admin = require('firebase-admin');
+/*const admin = require('firebase-admin');
 
 const serviceAccount = require('./key.js');
 
@@ -12,7 +12,7 @@ module.exports=  {
     firestore: firestore,
     entries: {
         async addEntry(name, content) {
-            const res = await firestore.collection('entries').doc(name).set({ content: content })
+            const res = await firestore.collection('entries').doc(name).set({ name: name, value: content })
             return res
         },
         async getEntry(name) {
@@ -25,7 +25,7 @@ module.exports=  {
             const res = await doc.get();
             const data = []
             res.forEach(snapshot => {
-                data.push(snapshot.get())
+                data.push(snapshot.data())
             })
             return data
         },
@@ -72,4 +72,4 @@ module.exports=  {
             }
         }
     }
-}
+}*/

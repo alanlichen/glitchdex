@@ -2,15 +2,14 @@ const { Client, MessageEmbed, Collection } = require('discord.js');
 const client = new Client();
 const fs = require('fs');
 const Database = require('@replit/database');
-const Canvas = require('canvas');
 const db = new Database();
 const Keyv = require('keyv');
 const db2 = new Keyv('sqlite://db.sqlite');
 const db3 = new Keyv('sqlite://blacklist.sqlite');
-client.db = db;
-client.db2 = db2;
+// client.db = db;
+// client.db2 = db2;
 client.db3 = db3;
-client.firebase = require('./database/db');
+client.firebase = require('./database/mongo');
 
 client.commands = new Collection();
 const bot = client;
@@ -23,30 +22,28 @@ for (const file of commands) {
 }
 
 const ids = [
-	'741090611842646139',
-	'231628302152892427',
-	'220663962616856576',
-	'564164277251080208',
 	'513864836279697411',
-	'691576874261807134',
-	'552086437437374479'
+	'564164277251080208',
+	'784660883573440553',
+	'231628302152892427',
+	'796180682984128542',
+	'552815108976279563'
 ];
 /*client.ids = ids;*/
 const blacklist = [];
 
 client.on('ready', async () => {
-	console.log(`logged in as ${client.user.tag}`);
-	client.user.setStatus('online');
+	console.log(`i just stole ${client.user.tag}'s identity lmao`);
+	client.firebase.connect(process.env.MONGO);
+	/*
+	db.list().then(async keys => {
+		keys.forEach(async key => {
+			const d = await db.get(key);
+			await client.firebase.entries.addEntry(key, d);
+		});
+	});
+    */
 	client.user.setActivity('glitchdex.tk', { type: 'LISTENING' });
-	let entries = db.list().then(e => {
-   return e.length + ' entries'
-   });
- function getActivity() {
-	let myStatuses = [entries(), 'glitchdex.tk'];
-		let randomStatus =
-			myStatuses[Math.floor(Math.random() * myStatuses.length)];
-		return '' + randomStatus + '';
-	}
 });
 
 client.on('message', async message => {
@@ -54,8 +51,14 @@ client.on('message', async message => {
 	/*for (const user of allUsrs) {
     await db3.set(user.id, false)
   }*/
-	if (!message.content.startsWith(process.env.prefix))
-		return;
+	if (!message.content.startsWith(process.env.prefix)) return;
+	/*
+
+	if(message.content){
+	  return message.channel.send('Glitchdex is currently down for maintenance')
+	}
+    */
+
 	if (!message.content.startsWith(process.env.prefix)) return;
 	if (blacklist.includes(message.author.id)) {
 		return;
@@ -111,16 +114,6 @@ client.on('message', async message => {
 		);
 	}
 });
-const applyText = (canvas, text) => {
-	const ctx = canvas.getContext('2d');
-	let fontSize = 70;
-
-	do {
-		ctx.font = `${(fontSize -= 10)}px sans-serif`;
-	} while (ctx.measureText(text).width > canvas.width - 300);
-
-	return ctx.font;
-};
 client.on('guildCreate', async guild => {
 	let channelID;
 	let channels = guild.channels.cache;
@@ -144,46 +137,20 @@ client.on('guildCreate', async guild => {
 	channel.send(joined);
 });
 client.on('guildMemberAdd', async member => {
-	const channel = member.guild.channels.cache.find(ch => ch.name === 'general');
+	let guild = member.guild;
+	let guildid = guild.id;
+	let guildname = guild.name;
+	const channel = guild.channels.cache.find(ch => ch.name === 'welcome');
 	if (!channel) return;
-
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
-
-	const background = await Canvas.loadImage('./wallpaper.jpg');
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-	ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText(
-		'Welcome to the server,',
-		canvas.width / 2.5,
-		canvas.height / 3.5
+	channel.send(
+		new MessageEmbed()
+			.addField(`WE HAVE A NEW MEMBER`, `Hello, ${member}`, true)
+			.addField(
+				`Welcome to the ${guildname} Discord Server`,
+				`hope you like our community`,
+				true
+			)
+			.setColor('RANDOM')
 	);
-
-	ctx.font = applyText(canvas, `${member.displayName}!`);
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText(
-		`${member.displayName}!`,
-		canvas.width / 2.5,
-		canvas.height / 1.8
-	);
-
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(
-		member.user.displayAvatarURL({ format: 'jpg' })
-	);
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = (canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(`Welcome to the server, ${member}!`, attachment);
 });
 client.login(process.env.discord_token);

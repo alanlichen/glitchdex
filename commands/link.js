@@ -12,7 +12,7 @@ module.exports = {
           .setColor('RANDOM')
       )
     }
-    client.db2.set(usrId, entry).then(() => {
+    client.firebase.entries.addLink(usrId, entry).then((res) => {
       message.channel.send(
         new MessageEmbed()
           .setTitle('Successfully linked!')

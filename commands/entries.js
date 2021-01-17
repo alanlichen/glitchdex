@@ -3,12 +3,13 @@ module.exports = {
   category: 'Admin',
   execute(client, message, args, MessageEmbed) {
     (async () => {
-      const entries = await client.db.list()
+      // const entries = await client.db.list()
+      const entries = await client.firebase.entries.getAllEntries();
       let fields = [];
       let i=0
       entries.forEach(v => {
         i++
-        fields.push({ name: i + '.', value: `[${v}](https://glitchdex.tk/entry?user=${v})`, inline: true })
+        fields.push({ name: i + '.', value: `[${v.name}](https://glitchdex.tk/entry?user=${v.name})`, inline: true })
       });
       const e = new MessageEmbed()
         .setTitle('Entries:')

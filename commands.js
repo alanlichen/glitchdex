@@ -16,11 +16,6 @@ module.exports = {
 			description: 'Returns specified entries value.'
 		},
 		{
-		name: 'reload',
-		category: 'Admin',
-		description: 'reloads all commands'
-},
-		{
 			name: 'addentry',
 			category: 'Admin',
 			description: 'add entries into the Glitchdex database.'

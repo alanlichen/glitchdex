@@ -25,7 +25,7 @@
       <div class="Grid">
         <div class="Subject">
           <h2 class="Header Text_Center">get started &darr; &darr; &darr;</h2>
-          <p class="Paragraph">GlitchDex Can Be Installed Via NPM</p>
+          <p class="Paragraph">Glitchdex Can Be Installed Via NPM</p>
           <div class="Btn" onclick="window.location.href='https://www.npmjs.com/package/glitchdex'"><span>Visit To NPM</span></div>
           <code class="Text_Center language-javascript">
             const glitchdex = require('glitchdex');
@@ -35,6 +35,12 @@
           <h2 class="Header Text_Center">Search Entries &darr; &darr; &darr;</h2>
           <code class="Text_Center language-javascript">
      console.log(await glitchdex.search(/^[^\d]+$/));
+          </code>
+        </div>
+        <div class="Subject">
+          <h2 class="Header Text_Center">Get API Version &darr; &darr; &darr;</h2>
+          <code class="Text_Center language-javascript">
+    console.log(await glitchdex.version());
           </code>
         </div>
         <div class="Subject">

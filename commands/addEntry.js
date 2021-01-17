@@ -1,10 +1,10 @@
 module.exports = {
   name: 'addentry',
   category: 'Admin',
-  execute(client, message, args, MessageEmbed) {
+  async execute(client, message, args, MessageEmbed) {
     const name = args[0];
     const value = message.content.split(" ").slice(2).join(" ");
-    client.db.set(args[0], '' + value + '');
+    await client.firebase.entries.addEntry(args[0], '' + value + '');
     let added = new MessageEmbed()
       .setTitle('Operation complete!')
       .setDescription(`You can now view the entry ${name} with the command \`${process.env.prefix}entry ${name}\` or by going to https://glitchdex.tk/entry?user=${name}`)

@@ -10,7 +10,7 @@ module.exports = {
           .setColor('RANDOM')
       )
     }
-    client.db2.delete(args[0]).then(() => {
+    client.firebase.entries.removeLink(args[0]).then((res) => {
       message.channel.send(
         new MessageEmbed()
           .setTitle('Entry unlinked!')

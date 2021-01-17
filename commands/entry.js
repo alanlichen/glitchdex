@@ -12,8 +12,8 @@ module.exports = {
       )
     }
     
-    client.db.get(args[0]).then(got => {
-      if (got === null) {
+    client.firebase.entries.getOneEntry(args[0]).then(got => {
+      if (!got) {
         const embed = new MessageEmbed()
           .setTitle('That entry does not exist.')
           .setDescription('Please try again.')
@@ -23,7 +23,7 @@ module.exports = {
       }
       const embed = new MessageEmbed()
         .setTitle('Results:')
-        .setDescription(got)
+        .setDescription(got.value)
         .setFooter(`Requested by: ${message.member ? message.member.displayName : message.author.username}`, message.author.displayAvatarURL())
         .setColor('RANDOM');
 message.channel.send(embed)
