@@ -1,9 +1,6 @@
 const express = require('express'); // Duh
-const Database = require('@replit/database');
-const bot = require('./bot2');
-const db = new Database();
+const bot = require('./bot');
 var app = express();
-const Keyv = require('keyv');
 const firebase = require('./database/mongo');
 var expressWs = require('express-ws')(app);
 let admins = ['3653331', '5368574', '3393956'];
@@ -33,7 +30,6 @@ app.ws('/srnet-ws', (ws, req) => {
 	});
 });
 app.get('/', async (req, res) => {
-	const users = await db.list();
 	let usr = '';
 	let len;
 	const entries = await firebase.entries.getAllEntries();
@@ -250,7 +246,6 @@ p{
 </style>`
 		);
 	} else {
-		// const results = await db.list(req.query.query);
 		const results = await firebase.entries.getEntry(req.query.query);
 		let srh = '';
 		if (!results) {
@@ -500,9 +495,7 @@ app.get('/admin/entry', function(req, res) {
 					.then(res.send(`successfully added entry`));
 			} else {
 				const { Webhook, MessageBuilder } = require('discord-webhook-node');
-				const hook = new Webhook(
-					'https://discord.com/api/webhooks/798077910929899520/tP9RBKHYi9AeWMBeWwb2GcZSCxnRTfVv9WzuygW-mJqLb9WvOD-ha6SMulgMrjo709ES'
-				);
+				const hook = new Webhook(process.env.WEBHOOK);
 
 				let embed = `Entry Name: ${name} | Entry Image URL: ${image} | Entry Added By ${req.header(
 					'X-Replit-User-Name'
@@ -589,7 +582,7 @@ app.get('/rawentries', async function(req, res) {
 	});
 });
 app.get('/docs', function(req, res) {
-	res.sendFile('Public/index.html', { root: __dirname });
+	res.sendFile('Docs/index.html', { root: __dirname });
 });
 app.get('/status', async function(req, res) {
 	const fetch = require('node-fetch');
@@ -612,7 +605,7 @@ app.get('/status', async function(req, res) {
 	}
 	res.send(`Uptime: ` + (await getUptime()));
 });
-app.use(express.static('Public'));
+app.use(express.static('Docs'));
 app.get('*', function(req, res) {
 	res.status(404).send('404 - Page Not Found');
 });
