@@ -582,7 +582,7 @@ app.get('/rawentries', async function(req, res) {
 	});
 });
 app.get('/docs', function(req, res) {
-	res.sendFile('Docs/index.html', { root: __dirname });
+	res.sendFile('docs/index.html', { root: __dirname });
 });
 app.get('/status', async function(req, res) {
 	const fetch = require('node-fetch');
@@ -605,7 +605,7 @@ app.get('/status', async function(req, res) {
 	}
 	res.send(`Uptime: ` + (await getUptime()));
 });
-app.use(express.static('Docs'));
+app.use(express.static('docs'));
 app.get('*', function(req, res) {
 	res.status(404).send('404 - Page Not Found');
 });

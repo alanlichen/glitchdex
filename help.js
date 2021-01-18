@@ -89,5 +89,12 @@ module.exports = {
 		category: 'Admin',
 		usercooldown: 'none',
 		guildcooldown: 'none'
+	},
+	whoisboss: {
+	  format: 'whoisboss',
+	  description: 'returns who the boss is',
+	  category: 'Admin',
+	  usercooldown: 'none',
+	  guildcooldown: 'none'
 	}
 };

@@ -23,6 +23,7 @@ module.exports = {
               new MessageEmbed()
                 .setTitle(`${message.mentions.users.first().tag}'s entry: `)
                 .setDescription(entry.value)
+                .setThumbnail(`https://cdn.glitchdex.tk/${entry.name}.jpg`)
                 .setColor('RANDOM')
             )
           })
@@ -50,6 +51,7 @@ module.exports = {
             message.channel.send(
               new MessageEmbed()
                 .setTitle(`${message.author.tag}'s entry: `)
+                .setThumbnail(`https://cdn.glitchdex.tk/${entry.name}.jpg`)
                 .setDescription(entry.value)
                 .setColor('RANDOM')
             )

@@ -16,6 +16,11 @@ module.exports = {
 			description: 'Returns specified entries value.'
 		},
 		{
+	  name: 'whoisboss',
+	  category: 'Admin',
+	  description: 'returns who the boss is'
+	},
+		{
 			name: 'addentry',
 			category: 'Admin',
 			description: 'add entries into the Glitchdex database.'

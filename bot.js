@@ -27,7 +27,7 @@ const ids = [
 const blacklist = [];
 
 client.on('ready', async () => {
-	console.log(`i just stolen ${client.user.tag}'s car lmao`);
+	console.log(`i just stolen ${client.user.tag}'s identity lmao`);
 	client.firebase.connect(process.env.MONGO);
 	client.user.setActivity('glitchdex.tk', { type: 'LISTENING' });
 });
@@ -70,7 +70,7 @@ client.on('message', async message => {
 				.setColor('RANDOM')
 		);
 	}
-	const blacklisted = await db3.get(message.author.id);
+	/*const blacklisted = await db3.get(message.author.id);
 	if (blacklisted === true) {
 		return message.channel.send(
 			new MessageEmbed()
@@ -86,7 +86,7 @@ client.on('message', async message => {
 				)
 				.setColor('RANDOM')
 		);
-	}
+	}*/
 
 	try {
 		client.commands.get(command).execute(client, message, args, MessageEmbed);
