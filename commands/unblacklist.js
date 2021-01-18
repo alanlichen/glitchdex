@@ -26,7 +26,7 @@ module.exports = {
       )
     }
     */
-		await client.db3.set(usrId, false);
+		await client.firebase.removeBlacklist(usrId);
 		message.channel.send(
 			new MessageEmbed()
 				.setTitle('User was unblacklisted!')
