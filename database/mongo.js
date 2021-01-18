@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const entrySchema = require('./schema/entrySchema');
 const linkSchema = require('./schema/linkSchema');
+const blacklistSchema = require('./schema/blacklistSchema');
+
 module.exports = {
 	blacklistSchema: require('./schema/blacklistSchema'),
 	entrySchema: require('./schema/entrySchema'),
@@ -75,7 +77,45 @@ module.exports = {
 		async removeLink(id) {
 			const res = await linkSchema.deleteOne({ id: id })
 			return res;
+		},
+		async addBlacklist(id) {
+			const res = await blacklistSchema.findOneAndUpdate(
+				{
+					id: id
+				},
+				{
+					id: id,
+					blacklisted: true
+				},
+				{
+					upsert: true
+				}
+			)
+			return res;
+		},
+		async checkBlacklist(id) {
+			const res = await blacklistSchema.findOne({ id: id });
+			if (res.blacklisted) {
+				const blacklisted = res.blacklisted
+				return blacklisted
+			} else {
+				return false;
+			}
+		},
+		async removeBlacklist(id) {
+			const res = await blacklistSchema.findOneAndUpdate(
+				{
+					id: id
+				},
+				{
+					id: id,
+					blacklisted: false
+				},
+				{
+					upsert: true
+				}
+			)
+			return res;
 		}
 	}
 };
-//what are you doing? => I am doing the link/blacklist functions, but im actually playing games rn because im bored. I just finished all the entry functions.
