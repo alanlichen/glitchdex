@@ -51,7 +51,7 @@ app.get('/', async (req, res) => {
   <a href="">Bot Prefix: ` +
 			prefix +
 			`</a>
-</div></center><hr class="secret"></head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glitchdex ~ Homepage</title><center><meta name="description" content="Glitchdex is a easy way for users in the Repl.it community get to learn false information"/><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="#00ffff"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
+</div></center><hr class="secret"></head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glitchdex ~ Homepage</title><center><meta name="description" content="Glitchdex is a easy way for users in the Repl.it community get to learn false information"/><meta property="og:image" content="https://cdn.glitchdex.tk/logo.jpg" /><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="#00ffff"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
 <div class="wrap">
    <div class="search">
       <input type="text" class="searchTerm" id="searchTerm" placeholder="What are you looking for?">
@@ -529,14 +529,18 @@ app.get('/entry', function(req, res) {
 			(async () => {
 				info = await firebase.entries.getOneEntry(req.query.user);
 				res.send(
-					`<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}</title>
+					`<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}'s entry on Glitchdex</title>
 					<meta name="description" content='` +
 						info.value +
 						`'/><center><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="${title}"><meta property="og:image" content="https://cdn.glitchdex.tk/${
 							req.query.user
-						}.jpg" /><h3 class="value">${title}</h3></center><center><img src="https://cdn.glitchdex.tk/${
+						}.jpg" /><h3 class="value">${title}</h3></center><center><a href="https://cdn.glitchdex.tk/${
 							req.query.user
-						}.jpg" alt="${title}" class="image" width="100px" height="100px"></center><hr class="secret"><center><div class="lol">${markdown.toHTML(
+						}.jpg"><img href="https://cdn.glitchdex.tk/${
+							req.query.user
+						}.jpg" src="https://cdn.glitchdex.tk/${
+							req.query.user
+						}.jpg" alt="${title}" class="image" width="100px" height="100px"></a></center><hr class="secret"><center><div class="lol">${markdown.toHTML(
 							info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g, '  \n')
 						)}</div></center><style>body{ background-color: #222; display: block; } .value{ color:white; } .image { position: float; margin: 0; /*right: -5;*/ border-radius: 50px; } .tts { height: 95px; width: 210px; background:transparent; } .lol{ position: float; bottom: 10; text-align: center; color: white; font-family: "Times New Roman", Times, serif; } .secret{ background-color: transparent; color: transparent; border: none; border-block-end-color: none;}</style>`
 				);

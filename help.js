@@ -6,6 +6,13 @@ module.exports = {
 		usercooldown: '5 Seconds',
 		guildcooldown: 'none'
 	},
+	contribute: {
+		format: 'contribute',
+		description: 'contribute to Glitchdex via Github',
+		category: 'Public',
+		usercooldown: '5 Seconds',
+		guildcooldown: 'none'
+	},
 	addentry: {
 		format: 'addEntry <name> <value>',
 		description: 'add entries into the Glitchdex database.',

@@ -16,6 +16,11 @@ module.exports = {
 			description: 'Returns specified entries value.'
 		},
 		{
+		name: 'contribute',
+		category: 'Public',
+		description: 'contribute to Glitchdex via Github'
+	},
+		{
 	  name: 'whoisboss',
 	  category: 'Admin',
 	  description: 'returns who the boss is'
