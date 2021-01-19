@@ -86,7 +86,7 @@ client.on('message', async message => {
 				)
 				.setColor('RANDOM')
 		);
-	}
+	}*/
 
 	try {
 		client.commands.get(command).execute(client, message, args, MessageEmbed);
