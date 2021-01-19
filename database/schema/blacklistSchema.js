@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    userID: String,
+    id: String,
     blacklisted: Boolean,
 })
 
