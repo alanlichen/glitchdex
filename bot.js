@@ -108,16 +108,13 @@ client.on('guildCreate', async guild => {
 		}
 	}
 	let channel = guild.channels.cache.get(guild.systemChannelID || channelID);
-	var joined = new MessageEmbed();
-	joined
-		.setTitle('Joined Server!')
+	channel.send(new MessageEmbed().setTitle('Joined Server!')
 		.setColor('RANDOM')
 		.addField(
 			'Thanks for inviting me into your community on Discord',
-			`you can enter ` + process.env.prefix + `help for a list of commands`,
+			`you can enter ${process.env.prefix}help for a list of commands`,
 			true
-		);
-	channel.send(joined);
+		));
 });
 client.on('guildMemberAdd', async member => {
 	let guild = member.guild;

@@ -585,10 +585,14 @@ app.get('/rawentries', async function(req, res) {
 		res.send(keys);
 	});
 });
+app.get('/raw_image', function(req, res) {
+	let find = req.query.find;
+	res.send(`https://cdn.glitchdex.tk/${find}.jpg`);
+});
 app.get('/docs', function(req, res) {
 	res.sendFile('docs/index.html', { root: __dirname });
 });
-app.get('/status', async function(req, res) {
+app.get('/uptime', async function(req, res) {
 	const fetch = require('node-fetch');
 	async function getUptime() {
 		return (
@@ -598,16 +602,18 @@ app.get('/status', async function(req, res) {
 						process.env.YOURKEY,
 					{
 						method: 'post',
-						body: '{"custom_uptime_ratios":"7"}',
+						body: '{"custom_uptime_ratios":"4"}',
 						headers: { 'Content-Type': 'application/json' }
 					}
-				).then(a => a.json())).monitors[6].custom_uptime_ratio * 10
+				).then(a => a.json())).monitors[4].custom_uptime_ratio * 10
 			) /
 				10 +
 			'%'
 		);
 	}
-	res.send(`Uptime: ` + (await getUptime()));
+	res.send(
+		`<head><meta name="description" content="Uptime: ${await getUptime()}"/><title>Glitchdex Server Uptime</title></head>Uptime: ${await getUptime()}`
+	);
 });
 app.use(express.static('docs'));
 app.get('*', function(req, res) {

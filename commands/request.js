@@ -20,11 +20,12 @@ module.exports = {
 			.addField('Guild ID:', guildid, true)
 			.addField('User Name:', username, true)
 			.addField('User ID:', message.author.id, true)
+			.addField('Channel Name:', message.channel.name, true)
+			.addField('Channel ID:', message.channel.id, true)
 			.addField('Message ID:', message.id, true);
 		let sentrequest = new MessageEmbed();
 		sentrequest.setTitle('sent request').setColor('RANDOM');
 		client.channels.cache.get('790766025254895616').send(request);
-		message.react('👍');
 		message.channel.send(sentrequest);
 	}
 };
