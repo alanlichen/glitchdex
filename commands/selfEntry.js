@@ -11,7 +11,7 @@ module.exports = {
               .setColor('RANDOM')
           )
         } else {
-          client.firebase.entries.getEntry(v.entry).then(entry => {
+          client.firebase.entries.getOneEntry(v.entry).then(entry => {
             if (!entry) {
               return message.channel.send(
                 new MessageEmbed()
