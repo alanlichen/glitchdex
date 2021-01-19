@@ -23,7 +23,7 @@ const ids = [
 	'796180682984128542',
 	'552815108976279563'
 ];
-/*client.ids = ids;*/
+client.ids = ids;
 const blacklist = [];
 
 client.on('ready', async () => {
