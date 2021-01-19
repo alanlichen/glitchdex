@@ -70,7 +70,7 @@ client.on('message', async message => {
 				.setColor('RANDOM')
 		);
 	}
-	/*const blacklisted = await db3.get(message.author.id);
+	const blacklisted = await client.firebase.entries.checkBlacklist.get(message.author.id);
 	if (blacklisted === true) {
 		return message.channel.send(
 			new MessageEmbed()
@@ -86,7 +86,7 @@ client.on('message', async message => {
 				)
 				.setColor('RANDOM')
 		);
-	}*/
+	}
 
 	try {
 		client.commands.get(command).execute(client, message, args, MessageEmbed);
