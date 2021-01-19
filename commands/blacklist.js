@@ -38,7 +38,7 @@ module.exports = {
       await client.firebase.set(usrId, true)
     }
     */
-   await client.firebase.addBlacklist(usrId)
+    await client.firebase.entries.addBlacklist(usrId)
     message.channel.send(
       new MessageEmbed()
         .setTitle('User was blacklisted!')
