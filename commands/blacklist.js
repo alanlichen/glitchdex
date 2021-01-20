@@ -18,16 +18,14 @@ module.exports = {
           .setColor('RANDOM')
       )
     }
-    /*
     if (client.ids.includes(usrId)) {
       return message.channel.send(
         new MessageEmbed()
-          .setTitle('Man, do you really think you can do that to others?')
-          .setDescription(`How would you feel if someone did it to you?`)
+          .setTitle('You cannot blacklist admins!')
+          .setDescription(`Please be nice to others`)
           .setColor('RANDOM')
       )
     }
-    */
    /*
     if (args[1]) {
       const ms = toMilliseconds({
