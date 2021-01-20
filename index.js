@@ -168,9 +168,10 @@ app.get('/entry', function(req, res) {
 							req.query.user
 						}.jpg" src="https://cdn.glitchdex.tk/${
 							req.query.user
-						}.jpg" alt="${title}" class="float-right rounded-full h-22 w-22 flex items-center justify-center" width="100px" height="100px"></a></center><div class="p-2"></div><center><div class="text-white">${markdown.toHTML(
-							info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g, '  \n')
-						)}</div></center><style>body { background-color: #222 }</style>`
+						}.jpg" alt="${title}" class="float-right rounded-full h-22 w-22 flex items-center justify-center" width="100px" height="100px"></a></center><div class="p-2"></div><center><div class="text-white markdown">${markdown.toHTML(
+                            info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g)
+                        )}</div>
+</center><style>body { background-color: #222 } .markdown a{ color: red; }</style>`
 				);
 			})();
 		} else {
