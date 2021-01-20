@@ -38,440 +38,58 @@ app.get('/', async (req, res) => {
 
 	entries.forEach(v => {
 		i++;
-		len = `${i}. `;
-		usr += `<p><a id="entries" href="https://glitchdex.tk/entry?user=${
+		len = `${i}`;
+		usr += `<span class="block"><p><a id="entries" href="https://glitchdex.tk/entry?user=${
 			v.name
-		}">${len}${v.name}</a></p>`;
+		}">${len}. ${v.name}</a></p></span>`;
 	});
 	res.send(
 		`<!doctype html><meta charset="utf-8"><head>
-  <center><div class="topnav">
-  <a class="active" href="/">Home</a>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <div class="topnav bg-green-300 p-1 flex space-x-5 flex items-center justify-center">
+  <img src="https://cdn.glitchdex.tk/logo.jpg" href="https://cdn.glitchdex.tk/logo.jpg" class="rounded-full w-8 h-8 flex items-center justify-center"><a href="/">Home</a>
   <a href="/add">Add Entries</a>
-  <a href="">Bot Prefix: ` +
-			prefix +
-			`</a>
-</div></center><hr class="secret"></head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glitchdex ~ Homepage</title><center><meta name="description" content="Glitchdex is a easy way for users in the Repl.it community get to learn false information"/><meta property="og:image" content="https://cdn.glitchdex.tk/logo.jpg" /><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="#00ffff"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
-<div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" id="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" onclick="sendQuery()" id="searchButton" class="searchButton">🔎</button>
-     </button>
-   </div>
-</div>
-<script>
-function sendQuery() {
-location.replace("https://glitchdex.tk/search?query=" + document.getElementById("searchTerm").value);
-  }</script>` +
+  <a href="">Bot Prefix: ${prefix}</a></div><div class="p-2"></div></head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glitchdex ~ Homepage</title><center><meta name="description" content="Glitchdex is a easy way for users in the Repl.it community get to learn false information"/><meta property="og:image" content="https://cdn.glitchdex.tk/logo.jpg" /><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="#00ffff"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect"><div class="space-y-4 text-white font-mono">` +
 			usr +
-			`</body><style>body { background-color: #222; margin: 0 auto; }
-.entries, a{ color: yellowgreen; font-weight: bolder; text-decoration: none; }
-.secret{
- border: none;
- background-color: transparent;
- color: transparent;
- border-block-end-color: transparent;
-}
-/* Add a black background color to the top navigation */
-.topnav {
-  float: center;
-  background-color: #333;
-  overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  /*text-align: center;*/
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.title{ color: yellowgreen; }
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.search {
-  width: 95%;
-  position: relative;
-  display: flex;
-}
-.searchButton{
-  width: 40px;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 37px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-p{
-  color: yellowgreen;
-}
-</style>`
+			`</div></body><style>
+			body{
+			  background-color: #222;
+			}
+			</style>`
 	);
 });
-app.get('/search', async function(req, res) {
-	if (req.query.query.length === 0) {
-		const users = await firebase.entries.getAllEntries();
-		let usr = '';
-		let len;
-		let i = 0;
-		users.forEach(v => {
-			i++;
-			len = `${i}. `;
-			usr += `<p><a id="entries" href="https://glitchdex.tk/entry?user=${
-				v.name
-			}">${len}${v.name}</a></p>`;
-		});
-		res.send(
-			`<!doctype html><meta charset="utf-8"><head>
-  <center><div class="topnav">
-  <a class="active" href="/">Home</a>
-  <a href="/add">Add Entries</a>
-  <a href="">Bot Prefix: ` +
-				prefix +
-				`</a>
-</div></center><hr class="secret"></head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glitchdex ~ Homepage</title><center><meta name="description" content="Glitchdex is a easy way for users in the Repl.it community get to learn false information"/><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="#00ffff"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
-<div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" id="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" onclick="sendQuery()" id="searchButton" class="searchButton">🔎</button>
-     </button>
-   </div>
-</div>
-<script>
-function sendQuery() {
-location.replace("https://glitchdex.tk/search?query=" + document.getElementById("searchTerm").value);
-  }</script>` +
-				usr +
-				`</body><style>body { background-color: #222; margin: 0 auto; }
-.entries, a{ color: yellowgreen; font-weight: bolder; text-decoration: none; }
-.secret{
- border: none;
- background-color: transparent;
- color: transparent;
- border-block-end-color: transparent;
-}
-/* Add a black background color to the top navigation */
-.topnav {
-  float: center;
-  background-color: #333;
-  overflow: hidden;
-}
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  /*text-align: center;*/
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.title{ color: yellowgreen; }
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.search {
-  width: 95%;
-  position: relative;
-  display: flex;
-}
-.searchButton{
-  width: 40px;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 37px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-p{
-  color: yellowgreen;
-}
-</style>`
-		);
-	} else {
-		const results = await firebase.entries.getEntry(req.query.query);
-		let srh = '';
-		if (!results) {
-			return res.send(
-				`<!doctype html><meta charset="utf-8"><head>
-  <center><div class="topnav">
-  <a class="active" href="/">Home</a>
-  <a href="/add">Add Entries</a>
-  <a href="">Bot Prefix: ` +
-					prefix +
-					`</a>
-</div></center><hr class="secret"></head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glitchdex ~ Homepage</title><center><meta name="description" content="Glitchdex is a easy way for users in the Repl.it community get to learn false information"/><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="#00ffff"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
-<div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" id="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" onclick="sendQuery()" id="searchButton" class="searchButton">🔎</button>
-     </button>
-   </div>
-</div>
-<script>
-function sendQuery() {
-location.replace("https://glitchdex.tk/search?query=" + document.getElementById("searchTerm").value);
-  }</script><p class="entries">Nothing Found!</p></body><style>body { background-color: #222; margin: 0 auto; }
-.entries, a{ color: yellowgreen; font-weight: bolder; text-decoration: none; }
-.secret{
- border: none;
- background-color: transparent;
- color: transparent;
- border-block-end-color: transparent;
-}
-/* Add a black background color to the top navigation */
-.topnav {
-  float: center;
-  background-color: #333;
-  overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  /*text-align: center;*/
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.title{ color: yellowgreen; }
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.search {
-  width: 95%;
-  position: relative;
-  display: flex;
-}
-.searchButton{
-  width: 40px;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 37px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-p{
-  color: yellowgreen;
-}
-</style>`
-			);
-		}
-		results.forEach(v => {
-			srh += `<p><a id="entries" href="https://glitchdex.tk/entry?user=${
-				v.name
-			}">${v.name}</a></p>`;
-		});
-		res.send(
-			`<!doctype html><meta charset="utf-8"><head>
-  <center><div class="topnav">
-  <a class="active" href="/">Home</a>
-  <a href="/add">Add Entries</a>
-  <a href="">Bot Prefix: ` +
-				prefix +
-				`</a>
-</div></center><hr class="secret"></head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glitchdex ~ Homepage</title><center><meta name="description" content="Glitchdex is a easy way for users in the Repl.it community get to learn false information"/><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="#00ffff"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
-<div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" id="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" onclick="sendQuery()" id="searchButton" class="searchButton">🔎</button>
-     </button>
-   </div>
-</div>
-<script>
-function sendQuery() {
-location.replace("https://glitchdex.tk/search?query=" + document.getElementById("searchTerm").value);
-  }</script>` +
-				srh +
-				`</body><style>body { background-color: #222; margin: 0 auto; }
-.entries, a{ color: yellowgreen; font-weight: bolder; text-decoration: none; }
-.secret{
- border: none;
- background-color: transparent;
- color: transparent;
- border-block-end-color: transparent;
-}
-/* Add a black background color to the top navigation */
-.topnav {
-  float: center;
-  background-color: #333;
-  overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  /*text-align: center;*/
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.title{ color: yellowgreen; }
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.search {
-  width: 95%;
-  position: relative;
-  display: flex;
-}
-.searchButton{
-  width: 40px;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 37px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-p{
-  color: yellowgreen;
-}
-</style>`
-		);
-	}
-});
 app.get('/add', function(req, res) {
 	let hex = '#00ffff';
 	if (req.header('X-Replit-User-Id')) {
 		if (admins.includes(req.header('X-Replit-User-Id'))) {
-			res.send(`<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Add Entries</title><center><meta name="description" content="add a entry (admins only)"/><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
-<h1 class="title">Hello, ${req.header('X-Replit-User-Name')}</h1>
-<h3 class="name">Entry Name:</h3>
-<input type="text" id="name" class="text">
-<hr>
-<h3 class="value">Entry Value:</h4>
-<textarea id="value" name="value" class="textarea" rows="10" columns="60"></textarea>
-<hr>
-<h3 class="name">Entry Image URL:</h3>
-<input type="text" id="url" class="text">
-<hr>
-<button onclick="sendEntry()" class="submit">Submit</button>
+			res.send(`<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Add Entries</title><center><meta name="description" content="add a entry (admins only)"/><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="Team ViewSelect">
+			  <div class="topnav bg-green-300 p-1 flex space-x-5 flex items-center justify-center">
+  <img src="https://cdn.glitchdex.tk/logo.jpg" href="https://cdn.glitchdex.tk/logo.jpg" class="rounded-full w-8 h-8 flex items-center justify-center"><a href="/">Home</a>
+  <a href="/add">Add Entries</a>
+  <a href="">Bot Prefix: ${prefix}</a></div><div class="p-2"></div>
+<h1 class="text-white">Hello, ${req.header('X-Replit-User-Name')}</h1>
+<div class="p-2"></div>
+<h3 class="text-white">Entry Name:</h3>
+<input type="text" id="name" class="outline-none">
+<div class="p-2"></div>
+<h3 class="text-white">Entry Value:</h4>
+<textarea id="value" name="value" class="outline-none" rows="10" columns="60"></textarea>
+<div class="p-2"></div>
+<h3 class="text-white">Entry Image URL:</h3>
+<input type="text" id="url" class="outline-none">
+<div class="p-2"></div>
+<button onclick="sendEntry()" class="text-green-400 outline-none">Submit</button>
 <script>
 function sendEntry() {
 window.location.href = 'https://glitchdex.tk/admin/entry?name=' + document.getElementById('name').value + '&value=' + document.getElementById('value').value + '&image=' + document.getElementById('url').value
 			;
 }
-</script><style>body{ background-color: #222; } .title{ color: white; } .name { color: white; } .value{ color: white; } .textarea{ background-color: purple; outline: none; background-color: purple; outline: none; border-radius: 25px;
-  padding: 20px;
-  width: 200px;
-  height: 150px; } .text{ background-color: purple; outline: none; border-radius: 25px;
-  padding: 20px;
-  width: 200px;
-  height: 150px; } .submit{ background-color: purple; outline: none; border-radius: 25px;
-  padding: 20px; }</style>`);
+</script><style>
+			body{
+			  background-color: #222;
+			}
+			</style>`);
 		} else {
 			res.send(
 				`hello, ${req.header(
@@ -492,7 +110,11 @@ app.get('/admin/entry', function(req, res) {
 			if (image.length === 0) {
 				firebase.entries
 					.addEntry(name, value)
-					.then(res.send(`successfully added entry`));
+					.then(
+						res.send(
+							`<script>window.location.href = 'https://glitchdex.tk/entry?user=${name}';</script>`
+						)
+					);
 			} else {
 				const { Webhook, MessageBuilder } = require('discord-webhook-node');
 				const hook = new Webhook(process.env.WEBHOOK);
@@ -503,7 +125,11 @@ app.get('/admin/entry', function(req, res) {
 				hook.send(embed);
 				firebase.entries
 					.addEntry(name, value)
-					.then(res.send(`successfully added entry`));
+					.then(
+						res.send(
+							`<script>window.location.href = 'https://glitchdex.tk/entry?user=${name}';</script>`
+						)
+					);
 			}
 		} else {
 			res.send('you are not a admin');
@@ -529,20 +155,22 @@ app.get('/entry', function(req, res) {
 			(async () => {
 				info = await firebase.entries.getOneEntry(req.query.user);
 				res.send(
-					`<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}'s entry on Glitchdex</title>
-					<meta name="description" content='` +
-						info.value +
-						`'/><center><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="${title}"><meta property="og:image" content="https://cdn.glitchdex.tk/${
+					`<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}'s entry on Glitchdex</title><meta name="description" content=` +
+						`${info.value}` +
+						`/><center><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="${title}"><meta property="og:image" content="https://cdn.glitchdex.tk/${
 							req.query.user
-						}.jpg" /><h3 class="value">${title}</h3></center><center><a href="https://cdn.glitchdex.tk/${
+						}.jpg" />  <div class="topnav bg-green-300 p-1 flex space-x-5 flex items-center justify-center">
+  <img src="https://cdn.glitchdex.tk/logo.jpg" href="https://cdn.glitchdex.tk/logo.jpg" class="rounded-full w-8 h-8 flex items-center justify-center"><a href="/">Home</a>
+  <a href="/add">Add Entries</a>
+  <a href="">Bot Prefix: ${prefix}</a></div><div class="p-2"></div><h3 class="text-white">${title}</h3></center><center><a href="https://cdn.glitchdex.tk/${
 							req.query.user
 						}.jpg"><img href="https://cdn.glitchdex.tk/${
 							req.query.user
 						}.jpg" src="https://cdn.glitchdex.tk/${
 							req.query.user
-						}.jpg" alt="${title}" class="image" width="100px" height="100px"></a></center><hr class="secret"><center><div class="lol">${markdown.toHTML(
+						}.jpg" alt="${title}" class="float-right rounded-full h-22 w-22 flex items-center justify-center" width="100px" height="100px"></a></center><div class="p-2"></div><center><div class="text-white">${markdown.toHTML(
 							info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g, '  \n')
-						)}</div></center><style>body{ background-color: #222; display: block; } .value{ color:white; } .image { position: float; margin: 0; /*right: -5;*/ border-radius: 50px; } .tts { height: 95px; width: 210px; background:transparent; } .lol{ position: float; bottom: 10; text-align: center; color: white; font-family: "Times New Roman", Times, serif; } .secret{ background-color: transparent; color: transparent; border: none; border-block-end-color: none;}</style>`
+						)}</div></center><style>body { background-color: #222 }</style>`
 				);
 			})();
 		} else {
