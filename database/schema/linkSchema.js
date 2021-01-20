@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    id: String,
-    entry: String
-})
+	id: String,
+	entry: String
+});
 
-module.exports = mongoose.model('linkSchema', schema)
+module.exports = mongoose.model('linkSchema', schema);

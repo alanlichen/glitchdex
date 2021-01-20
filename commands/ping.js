@@ -6,11 +6,19 @@ module.exports = {
 			new MessageEmbed()
 				.setTitle('PING:')
 				.addField(
-					`🏓 Latency is ${Date.now() - message.createdTimestamp}ms.`,
+					`🏓 Latency is ${Date.now() - message.createdTimestamp}ms`,
 					`API Latency is ${Math.round(client.ws.ping)}ms`,
 					true
 				)
 				.setColor('RANDOM')
+				.setFooter(
+					`Requested by: ${
+						message.member
+							? message.member.displayName
+							: message.author.username
+					}`,
+					message.author.displayAvatarURL()
+				)
 		);
 	}
 };

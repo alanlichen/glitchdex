@@ -70,7 +70,9 @@ client.on('message', async message => {
 				.setColor('RANDOM')
 		);
 	}
-	const blacklisted = await client.firebase.entries.checkBlacklist(message.author.id);
+	const blacklisted = await client.firebase.entries.checkBlacklist(
+		message.author.id
+	);
 	if (blacklisted === true) {
 		return message.channel.send(
 			new MessageEmbed()
@@ -86,7 +88,7 @@ client.on('message', async message => {
 				)
 				.setColor('RANDOM')
 		);
-    }
+	}
 
 	try {
 		client.commands.get(command).execute(client, message, args, MessageEmbed);
@@ -108,13 +110,16 @@ client.on('guildCreate', async guild => {
 		}
 	}
 	let channel = guild.channels.cache.get(guild.systemChannelID || channelID);
-	channel.send(new MessageEmbed().setTitle('Joined Server!')
-		.setColor('RANDOM')
-		.addField(
-			'Thanks for inviting me into your community on Discord',
-			`you can enter ${process.env.prefix}help for a list of commands`,
-			true
-		));
+	channel.send(
+		new MessageEmbed()
+			.setTitle('Joined Server!')
+			.setColor('RANDOM')
+			.addField(
+				'Thanks for inviting me into your community on Discord',
+				`you can enter ${process.env.prefix}help for a list of commands`,
+				true
+			)
+	);
 });
 client.on('guildMemberAdd', async member => {
 	let guild = member.guild;

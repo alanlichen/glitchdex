@@ -34,10 +34,10 @@ module.exports = {
 			const res = await entrySchema.find({ name: name });
 			return res;
 		},
-        async getOneEntry(name) {
+		async getOneEntry(name) {
 			const res = await entrySchema.findOne({ name: name });
 			return res;
-        },
+		},
 		async getAllEntries() {
 			const data = await entrySchema.find();
 			return data;
@@ -71,11 +71,11 @@ module.exports = {
 			return res;
 		},
 		async getLink(id) {
-			const res = linkSchema.findOne({ id: id })
-			return res
+			const res = linkSchema.findOne({ id: id });
+			return res;
 		},
 		async removeLink(id) {
-			const res = await linkSchema.deleteOne({ id: id })
+			const res = await linkSchema.deleteOne({ id: id });
 			return res;
 		},
 		async addBlacklist(id) {
@@ -90,16 +90,16 @@ module.exports = {
 				{
 					upsert: true
 				}
-			)
+			);
 			return res;
 		},
 		async checkBlacklist(id) {
 			const res = await blacklistSchema.findOne({ id: id });
 			if (!res) {
-                return false
+				return false;
 			} else {
-				const blacklisted = res.blacklisted
-				return blacklisted
+				const blacklisted = res.blacklisted;
+				return blacklisted;
 			}
 		},
 		async removeBlacklist(id) {
@@ -114,7 +114,7 @@ module.exports = {
 				{
 					upsert: true
 				}
-			)
+			);
 			return res;
 		}
 	}

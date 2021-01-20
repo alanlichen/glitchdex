@@ -98,10 +98,10 @@ module.exports = {
 		guildcooldown: 'none'
 	},
 	whoisboss: {
-	  format: 'whoisboss',
-	  description: 'returns who the boss is',
-	  category: 'Admin',
-	  usercooldown: 'none',
-	  guildcooldown: 'none'
+		format: 'whoisboss',
+		description: 'returns who the boss is',
+		category: 'Admin',
+		usercooldown: 'none',
+		guildcooldown: 'none'
 	}
 };
