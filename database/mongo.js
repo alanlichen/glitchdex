@@ -95,11 +95,11 @@ module.exports = {
 		},
 		async checkBlacklist(id) {
 			const res = await blacklistSchema.findOne({ id: id });
-			if (res.blacklisted) {
+			if (!res) {
+                return false
+			} else {
 				const blacklisted = res.blacklisted
 				return blacklisted
-			} else {
-				return false;
 			}
 		},
 		async removeBlacklist(id) {
