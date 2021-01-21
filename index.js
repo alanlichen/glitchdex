@@ -169,8 +169,8 @@ app.get('/entry', function(req, res) {
 						}.jpg" src="https://cdn.glitchdex.tk/${
 							req.query.user
 						}.jpg" alt="${title}" class="float-right rounded-full h-22 w-22 flex items-center justify-center" width="100px" height="100px"></a></center><div class="p-2"></div><center><div class="text-white markdown">${markdown.toHTML(
-                            info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g)
-                        )}</div>
+							info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g)
+						)}</div>
 </center><style>body { background-color: #222 } .markdown a{ color: red; }</style>`
 				);
 			})();
@@ -190,20 +190,25 @@ app.get('/raw_entry', function(req, res) {
 	let info;
 	let title = req.query.user;
 	let hex = '#00ffff';
-	firebase.entries.getAllEntries().then(e => {
-		keys = [];
-		e.forEach(v => {
-			keys.push(v.name);
+
+	if (title === 'undefined') {
+		return res.send("you didn't specify a entry to get information on...");
+	} else {
+		firebase.entries.getAllEntries().then(e => {
+			keys = [];
+			e.forEach(v => {
+				keys.push(v.name);
+			});
+			if (keys.includes(req.query.user)) {
+				(async () => {
+					returnedrawdata = await firebase.entries.getOneEntry(req.query.user);
+					res.send(`${returnedrawdata.value}`);
+				})();
+			} else {
+				res.send(`404 - Entry Not Found`);
+			}
 		});
-		if (keys.includes(req.query.user)) {
-			(async () => {
-				returnedrawdata = await firebase.entries.getOneEntry(req.query.user);
-				res.send(`${returnedrawdata.value}`);
-			})();
-		} else {
-			res.send(`404 - Entry Not Found`);
-		}
-	});
+	}
 });
 app.get('/rawentries', async function(req, res) {
 	firebase.entries.getAllEntries().then(e => {
@@ -216,7 +221,21 @@ app.get('/rawentries', async function(req, res) {
 });
 app.get('/raw_image', function(req, res) {
 	let find = req.query.find;
-	res.send(`https://cdn.glitchdex.tk/${find}.jpg`);
+	if (find === 'undefined') {
+		return res.send("you didn't specify a entry name to get an image for...");
+	} else {
+		firebase.entries.getAllEntries().then(e => {
+			keys = [];
+			e.forEach(v => {
+				keys.push(v.name);
+			});
+			if (keys.includes(find)) {
+				res.send(`https://cdn.glitchdex.tk/${find}.jpg`);
+			} else {
+				return res.send('that entry does not exist...');
+			}
+		});
+	}
 });
 app.get('/docs', function(req, res) {
 	res.sendFile('docs/index.html', { root: __dirname });
