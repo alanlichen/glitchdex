@@ -94,9 +94,9 @@ client.on('message', async message => {
 		client.commands.get(command).execute(client, message, args, MessageEmbed);
 	} catch (error) {
 		console.error(error);
-		message.reply(
+		message.channel.send(new MessageEmbed().setTitle('ERROR:').setColor('RANDOM').setDescription(
 			'There was an issue executing that command! Please make sure you are using the command properly, then contact the owner of the bot.'
-		);
+		));
 	}
 });
 client.on('guildCreate', async guild => {
@@ -131,8 +131,8 @@ client.on('guildMemberAdd', async member => {
 		new MessageEmbed()
 			.addField(`WE HAVE A NEW MEMBER`, `Hello, ${member}`, true)
 			.addField(
-				`Welcome to the ${guildname} Discord Server`,
-				`hope you like our community`,
+				`Welcome to ${guildname}`,
+				`hope you like the community`,
 				true
 			)
 			.setColor('RANDOM')
