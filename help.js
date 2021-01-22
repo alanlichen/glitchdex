@@ -6,6 +6,20 @@ module.exports = {
     usercooldown: '5 Seconds',
     guildcooldown: 'none'
   },
+  verify: {
+    format: 'verify <entryname>',
+    description: 'verify a entry',
+    category: 'Admin',
+    usercooldown: 'none',
+    guildcooldown: 'none'
+  },
+  unverify: {
+    format: 'unverify <entryname>',
+    description: 'unverify a entry',
+    category: 'Admin',
+    usercooldown: 'none',
+    guildcooldown: 'none'
+  },
   contribute: {
     format: 'contribute',
     description: 'contribute to Glitchdex via Github',

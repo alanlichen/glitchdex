@@ -1,6 +1,8 @@
 const express = require('express'); // Duh
 const bot = require('./bot');
 var app = express();
+const Database = require("@replit/database")
+const db = new Database()
 const firebase = require('./database/mongo');
 var expressWs = require('express-ws')(app);
 let admins = ['3653331', '5368574', '3393956'];
@@ -43,6 +45,7 @@ app.get('/', async (req, res) => {
       v.name
       }">${len}. ${v.name}</a></p></span>`;
   });
+
   res.send(
     `<!doctype html><meta charset="utf-8"><head>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
@@ -107,6 +110,7 @@ app.get('/admin/entry', function(req, res) {
       let name = req.query.name;
       let value = req.query.value;
       let image = req.query.image;
+
       if (image.length === 0) {
         firebase.entries
           .addEntry(name, value)
@@ -151,38 +155,71 @@ app.get('/entry', function(req, res) {
     e.forEach(v => {
       keys.push(v.name);
     });
-    if (keys.includes(req.query.user)) {
-      (async () => {
-        info = await firebase.entries.getOneEntry(req.query.user);
-        res.send(
-          `<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}'s entry on Glitchdex</title><meta name="description" content=` +
-          `${info.value}` +
-          `/><center><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="${title}"><meta property="og:image" content="https://cdn.glitchdex.tk/${
-          req.query.user
-          }.jpg" />  <div class="topnav bg-green-300 p-1 flex space-x-5 flex items-center justify-center">
+    db.list(title).then(matches => {
+      if (JSON.stringify(matches).includes(title)) {
+        if (keys.includes(req.query.user)) {
+          (async () => {
+            info = await firebase.entries.getOneEntry(req.query.user);
+            res.send(
+              `<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title} &#10003;'s entry on Glitchdex</title><meta name="description" content="${info.value}"/><center><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="${title}"><meta property="og:image" content="https://cdn.glitchdex.tk/${
+              req.query.user
+              }.jpg" /><div class="p-2"></div><h3 class="text-white">${title} &#10003;</h3></center><center><a href="https://cdn.glitchdex.tk/${
+              req.query.user
+              }.jpg"><img href="https://cdn.glitchdex.tk/${
+              req.query.user
+              }.jpg" src="https://cdn.glitchdex.tk/${
+              req.query.user
+              }.jpg" alt="${title}" class="float-right rounded-full h-22 w-22 flex items-center justify-center" width="100px" height="100px"></a></center><div class="p-2"></div><center><div class="text-white markdown">${markdown.toHTML(
+                info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g)
+              )}</div>
+</center><style>body { background-color: #222 } .markdown a{ color: red; }</style>`
+            );
+          })();
+        } else {
+          res.send(
+            `<meta name="viewport" content="width=device-width, initial-scale=1.0"><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><title>${
+            req.query.user
+            } is not a valid entry</title><meta name="description" content="ask a admin to add the entry for you"/><center><h4 class="value">` +
+            req.query.user +
+            ' is not a valid entry, ask a admin to add the entry for you</h4></center><style>body{ background-color: #222; } .value{ color: white; }'
+          );
+        }
+      }
+      else {
+        if (keys.includes(req.query.user)) {
+          (async () => {
+            info = await firebase.entries.getOneEntry(req.query.user);
+            res.send(
+              `<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${title}'s entry on Glitchdex</title><meta name="description" content=` +
+              `${info.value}` +
+              `/><center><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><meta name="theme-color" content="${hex}"><meta content="Glitchdex" property="og:site_name"><meta name="author" content="${title}"><meta property="og:image" content="https://cdn.glitchdex.tk/${
+              req.query.user
+              }.jpg" />  <div class="topnav bg-green-300 p-1 flex space-x-5 flex items-center justify-center">
   <img src="https://cdn.glitchdex.tk/logo.jpg" href="https://cdn.glitchdex.tk/logo.jpg" class="rounded-full w-8 h-8 flex items-center justify-center"><a href="/">Home</a>
   <a href="/add">Add Entries</a>
   <a href="">Bot Prefix: ${prefix}</a></div><div class="p-2"></div><h3 class="text-white">${title}</h3></center><center><a href="https://cdn.glitchdex.tk/${
-          req.query.user
-          }.jpg"><img href="https://cdn.glitchdex.tk/${
-          req.query.user
-          }.jpg" src="https://cdn.glitchdex.tk/${
-          req.query.user
-          }.jpg" alt="${title}" class="float-right rounded-full h-22 w-22 flex items-center justify-center" width="100px" height="100px"></a></center><div class="p-2"></div><center><div class="text-white markdown">${markdown.toHTML(
-            info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g)
-          )}</div>
+              req.query.user
+              }.jpg"><img href="https://cdn.glitchdex.tk/${
+              req.query.user
+              }.jpg" src="https://cdn.glitchdex.tk/${
+              req.query.user
+              }.jpg" alt="${title}" class="float-right rounded-full h-22 w-22 flex items-center justify-center" width="100px" height="100px"></a></center><div class="p-2"></div><center><div class="text-white markdown">${markdown.toHTML(
+                info.value.replace(/\\n|\\r\\n|\\n\\r|\\r/g)
+              )}</div>
 </center><style>body { background-color: #222 } .markdown a{ color: red; }</style>`
-        );
-      })();
-    } else {
-      res.send(
-        `<meta name="viewport" content="width=device-width, initial-scale=1.0"><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><title>${
-        req.query.user
-        } is not a valid entry</title><meta name="description" content="ask a admin to add the entry for you"/><center><h4 class="value">` +
-        req.query.user +
-        ' is not a valid entry, ask a admin to add the entry for you</h4></center><style>body{ background-color: #222; } .value{ color: white; }'
-      );
-    }
+            );
+          })();
+        } else {
+          res.send(
+            `<meta name="viewport" content="width=device-width, initial-scale=1.0"><link type="application/json+oembed" href="https://glitchdex.tk/discordembed.json"/><title>${
+            req.query.user
+            } is not a valid entry</title><meta name="description" content="ask a admin to add the entry for you"/><center><h4 class="value">` +
+            req.query.user +
+            ' is not a valid entry, ask a admin to add the entry for you</h4></center><style>body{ background-color: #222; } .value{ color: white; }'
+          );
+        }
+      }
+    });
   });
 });
 app.get('/raw_entry', function(req, res) {
@@ -240,22 +277,8 @@ app.get('/raw_image', function(req, res) {
 app.get('/docs', function(req, res) {
   res.sendFile('docs/index.html', { root: __dirname });
 });
-app.get('/raw_info', function(req, res) {
-  let type = req.query.type;
-  let entry = { verified: ['brookemonk', 'selectthegang', 'cow'], unverified: ['thei5pro', 'allawesome497', 'spotandjake', 'karen', 'API', 'alanchen12', 'oignons', 'donotclickthis', 'adminabuse'] };
-  if (type === 'verified') {
-    return res.json(JSON.stringify(entry.verified))
-  }
-  if (type === 'unverified') {
-    return res.json(JSON.stringify(entry.unverified))
-  }
-  if (type === 'undefined') {
-    return res.json(JSON.stringify(["you didn't specify a request type, such as verified or unverified"]))
-  }
-  else {
-    return res.json(JSON.stringify(['Invalid Request Type, please specify a request type such as verified or unverified']))
-
-  }
+app.get('/verified', async function(req, res) {
+  db.list().then(keys => { res.json(JSON.stringify(keys)) });
 });
 app.get('/uptime', async function(req, res) {
   const fetch = require('node-fetch');

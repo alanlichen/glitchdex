@@ -25,42 +25,47 @@
       <div class="Grid">
         <div class="Subject">
           <h2 class="Header Text_Center">get started &darr; &darr; &darr;</h2>
-          <p class="Paragraph">Glitchdex Can Be Installed Via NPM</p>
-          <div class="Btn" onclick="window.location.href='https://www.npmjs.com/package/glitchdex'"><span>Visit To NPM</span></div>
+          <div class="Btn" onclick="window.location.href='https://www.npmjs.com/package/glitchdex'"><span>Visit NPM</span></div>
           <code class="Text_Center language-javascript">
-            const glitchdex = require('glitchdex');
+           const glitchdex = require('glitchdex');
           </code>
         </div>
         <div class="Subject">
           <h2 class="Header Text_Center">Search Entries &darr; &darr; &darr;</h2>
           <code class="Text_Center language-javascript">
-     console.log(await glitchdex.search(/^[^\d]+$/));
+      await console.log(await glitchdex.search(/^[^\d]+$/));
           </code>
         </div>
         <div class="Subject">
           <h2 class="Header Text_Center">Get API Version &darr; &darr; &darr;</h2>
           <code class="Text_Center language-javascript">
-    console.log(await glitchdex.version());
+     await console.log(await glitchdex.version());
           </code>
         </div>
         <div class="Subject">
           <h2 class="Header Text_Center">Get Entry Image &darr; &darr; &darr;</h2>
           <code class="Text_Center language-javascript">
-            console.log(await glitchdex.image('entryname'));
+            await console.log(await glitchdex.image('entryname'));
           </code>
         </div>
         <div class="Subject">
-         <h2 class="Header Text_Center">Find Entries &darr; &darr; &darr;</h2>
+         <h2 class="Header Text_Center">Get Entry Value &darr; &darr; &darr;</h2>
         <code class="Text_Center language-javascript">
-      console.log(await glitchdex.find('entryname'));
+       await console.log(await glitchdex.find('entryname'));
         </code>
         </div>
         <div class="Subject">
           <h2 class="Header Text_Center">Get All Entries &darr; &darr; &darr;</h2>
           <code class="Text_Center language-javascript">
-      console.log(await glitchdex.entries());
+       await console.log(await glitchdex.entries());
           </code>
         </div>
+        <!--<div class="Subject">
+    <h2 class="Header Text_Center">Get Entry Information &darr; &darr; &darr;</h2>
+          <code class="Text_Center language-javascript">
+               await glitchdex.info('request-type')
+          </code>
+        </div>-->
       </div>
     </section>
     <!-- Syntax Highlighter -->
