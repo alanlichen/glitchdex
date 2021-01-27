@@ -32,7 +32,7 @@ const blacklist = [];
 
 client.on('ready', async () => {
   console.log(`i just stolen ${client.user.tag}'s identity lmao`);
-  client.firebase.connect(process.env.MONGO);
+  client.mongo.connect(process.env.MONGO);
   client.user.setActivity('glitchdex.tk', { type: 'LISTENING' });
 });
 
@@ -74,7 +74,7 @@ client.on('message', async message => {
         .setColor('RANDOM')
     );
   }
-  const blacklisted = await client.firebase.entries.checkBlacklist(
+  const blacklisted = await client.mongo.entries.checkBlacklist(
     message.author.id
   );
   if (blacklisted === true) {
