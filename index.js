@@ -5,7 +5,7 @@ const Database = require("@replit/database")
 const db = new Database()
 const firebase = require('./database/mongo');
 var expressWs = require('express-ws')(app);
-let admins = ['3653331', '5368574', '3393956'];
+let admins = ['3653331', '5368574', '3393956', '1340533'];
 var markdown = require('markdown').markdown;
 let prefix = process.env.prefix;
 app.ws('/srnet-ws', (ws, req) => {
@@ -302,6 +302,14 @@ app.get('/uptime', async function(req, res) {
   res.send(
     `<head><meta name="description" content="Uptime: ${await getUptime()}"/><title>Glitchdex Server Uptime</title></head>Uptime: ${await getUptime()}`
   );
+});
+app.get('/blacklist', async function(req, res) {
+  const blacklisted = await firebase.entries.checkBlacklist(
+    req.query.id
+  );
+  res.send(
+    blacklisted
+  )
 });
 app.use(express.static('docs'));
 app.get('*', function(req, res) {

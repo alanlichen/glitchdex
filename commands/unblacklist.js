@@ -16,14 +16,14 @@ module.exports = {
 					.setColor('RANDOM')
 			);
 		}
-		if (client.ids.includes(usrId)) {
+		/*if (client.ids.includes(usrId)) {
 			return message.channel.send(
 				new MessageEmbed()
 					.setTitle('You cannot unblacklist admins!')
 					.setDescription(`Please be nice.`)
 					.setColor('RANDOM')
 			);
-		}
+    }*/
 		await client.firebase.entries.removeBlacklist(usrId);
 		message.channel.send(
 			new MessageEmbed()
