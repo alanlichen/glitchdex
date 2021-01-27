@@ -16,6 +16,7 @@
     "@sindresorhus/to-milliseconds": "^1.2.0",
     "canvas": "^2.6.1",
     "clipboard": "^2.0.6",
+    "database": "0.0.2",
     "discord-webhook-node": "^1.1.8",
     "discord.js": "^12.5.1",
     "express": "^4.17.1",

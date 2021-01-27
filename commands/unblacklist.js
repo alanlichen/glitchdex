@@ -16,15 +16,20 @@ module.exports = {
 					.setColor('RANDOM')
 			);
 		}
-		if (client.ids.includes(usrId)) {
+		/*if (client.ids.includes(usrId)) {
 			return message.channel.send(
 				new MessageEmbed()
 					.setTitle('You cannot unblacklist admins!')
 					.setDescription(`Please be nice.`)
 					.setColor('RANDOM')
 			);
+<<<<<<< HEAD
 		}
 		await client.mongo.entries.removeBlacklist(usrId);
+=======
+    }*/
+		await client.firebase.entries.removeBlacklist(usrId);
+>>>>>>> d82dce710e861d14209a159527382db76b2c5558
 		message.channel.send(
 			new MessageEmbed()
 				.setTitle('User was unblacklisted!')

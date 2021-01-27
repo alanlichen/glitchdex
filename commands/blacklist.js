@@ -18,14 +18,14 @@ module.exports = {
 					.setColor('RANDOM')
 			);
 		}
-		if (client.ids.includes(usrId)) {
+		/*if (client.ids.includes(usrId)) {
 			return message.channel.send(
 				new MessageEmbed()
 					.setTitle('You cannot blacklist admins!')
 					.setDescription(`Please be nice to others`)
 					.setColor('RANDOM')
 			);
-		}
+    }*/
 		/*
     if (args[1]) {
       const ms = toMilliseconds({
