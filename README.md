@@ -1,5 +1,5 @@
 # Glitchdex
-Glitchdex is a project that allows you to view entries on different members of the repl.it server.
+Glitchdex is a open source project that allows you to view entries on different users of the [Repl.it Discord Server](https://replit.com/discord)
 
 ### Contributing
 To contribute, create a pull request.

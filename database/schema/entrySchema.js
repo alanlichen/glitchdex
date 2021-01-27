@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    name: String,
-    value: String
-})
+	name: String,
+	value: String
+});
 
-module.exports = mongoose.model('entrySchema', schema)
+module.exports = mongoose.model('entrySchema', schema);
