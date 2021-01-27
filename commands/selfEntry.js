@@ -3,7 +3,7 @@ module.exports = {
 	category: 'Public',
 	execute(client, message, args, MessageEmbed) {
 		if (message.mentions.users.first()) {
-			client.firebase.entries
+			client.mongo.entries
 				.getLink(message.mentions.users.first().id)
 				.then(v => {
 					if (!v) {
@@ -11,7 +11,7 @@ module.exports = {
 							new MessageEmbed().setTitle('No entry found!').setColor('RANDOM')
 						);
 					} else {
-						client.firebase.entries.getOneEntry(v.entry).then(entry => {
+						client.mongo.entries.getOneEntry(v.entry).then(entry => {
 							if (!entry) {
 								return message.channel.send(
 									new MessageEmbed()
@@ -30,13 +30,13 @@ module.exports = {
 					}
 				});
 		} else {
-			client.firebase.entries.getLink(message.author.id).then(v => {
+			client.mongo.entries.getLink(message.author.id).then(v => {
 				if (!v) {
 					return message.channel.send(
 						new MessageEmbed().setTitle('No entry found!').setColor('RANDOM')
 					);
 				} else {
-					client.firebase.entries.getOneEntry(v.entry).then(entry => {
+					client.mongo.entries.getOneEntry(v.entry).then(entry => {
 						if (!entry) {
 							return message.channel.send(
 								new MessageEmbed()

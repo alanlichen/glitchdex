@@ -31,12 +31,12 @@ module.exports = {
       const ms = toMilliseconds({
         minutes: parseInt(args[1])
       })
-      await client.firebase.set(usrId, true, ms)
+      await client.mongo.set(usrId, true, ms)
     } else {
-      await client.firebase.set(usrId, true)
+      await client.mongo.set(usrId, true)
     }
     */
-		await client.firebase.entries.addBlacklist(usrId);
+		await client.mongo.entries.addBlacklist(usrId);
 		message.channel.send(
 			new MessageEmbed()
 				.setTitle('User was blacklisted!')

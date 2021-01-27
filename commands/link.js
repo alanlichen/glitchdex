@@ -14,7 +14,7 @@ module.exports = {
 					.setColor('RANDOM')
 			);
 		}
-		client.firebase.entries.addLink(usrId, entry).then(res => {
+		client.mongo.entries.addLink(usrId, entry).then(res => {
 			message.channel.send(
 				new MessageEmbed()
 					.setTitle('Successfully linked!')

@@ -2,11 +2,14 @@ const { Client, MessageEmbed, Collection } = require('discord.js');
 const client = new Client();
 const fs = require('fs');
 const Database = require('@replit/database');
-const db = new Database();
-client.firebase = require('./database/mongo');
+
+
+client.mongo = require('./database/mongo');
+
+const repldb = new Database();
+client.repldb = repldb;
 
 client.commands = new Collection();
-const bot = client;
 const commands = fs
   .readdirSync('./commands')
   .filter(file => file.endsWith('.js'));
