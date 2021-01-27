@@ -11,22 +11,12 @@ client.repldb = repldb;
 
 client.commands = new Collection();
 const commands = fs
-<<<<<<< HEAD
-	.readdirSync('./commands')
-	.filter(file => file.endsWith('.js'));
-
-commands.forEach(file => {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
-})
-=======
   .readdirSync('./commands')
   .filter(file => file.endsWith('.js'));
 for (const file of commands) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
 }
->>>>>>> d82dce710e861d14209a159527382db76b2c5558
 
 const ids = [
   '513864836279697411',
@@ -41,15 +31,9 @@ client.ids = ids;
 const blacklist = [];
 
 client.on('ready', async () => {
-<<<<<<< HEAD
-	console.log(`i just stolen ${client.user.tag}'s identity lmao`);
-	client.mongo.connect(process.env.MONGO);
-	client.user.setActivity('glitchdex.tk', { type: 'LISTENING' });
-=======
   console.log(`i just stolen ${client.user.tag}'s identity lmao`);
   client.firebase.connect(process.env.MONGO);
   client.user.setActivity('glitchdex.tk', { type: 'LISTENING' });
->>>>>>> d82dce710e861d14209a159527382db76b2c5558
 });
 
 client.on('message', async message => {
@@ -69,48 +53,6 @@ client.on('message', async message => {
   const args = message.content.slice(process.env.prefix.length).split(/ +/g);
   const command = args.shift().toLowerCase();
 
-<<<<<<< HEAD
-	if (!client.commands.has(command)) return;
-	if (
-		client.commands.get(command).category === 'Admin' &&
-		!ids.includes(message.author.id)
-	) {
-		console.log('e');
-		return message.channel.send(
-			new MessageEmbed()
-				.setTitle('You are not an admin!')
-				.setDescription('You must be an admin to run this command.')
-				.setFooter(
-					`Requested by: ${
-						message.member
-							? message.member.displayName
-							: message.author.username
-					}`,
-					message.author.displayAvatarURL()
-				)
-				.setColor('RANDOM')
-		);
-	}
-	const blacklisted = await client.mongo.entries.checkBlacklist(
-		message.author.id
-	);
-	if (blacklisted === true) {
-		return message.channel.send(
-			new MessageEmbed()
-				.setTitle('You are blacklisted from the bot!')
-				.setDescription('You cannot run any commands while blacklisted.')
-				.setFooter(
-					`Requested by: ${
-						message.member
-							? message.member.displayName
-							: message.author.username
-					}`,
-					message.author.displayAvatarURL()
-				)
-				.setColor('RANDOM')
-		);
-	}
-=======
   if (!client.commands.has(command)) return;
   if (
     client.commands.get(command).category === 'Admin' &&
@@ -151,7 +93,6 @@ client.on('message', async message => {
         .setColor('RANDOM')
     );
   }
->>>>>>> d82dce710e861d14209a159527382db76b2c5558
 
   try {
     client.commands.get(command).execute(client, message, args, MessageEmbed);
