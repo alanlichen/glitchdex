@@ -19,7 +19,7 @@ module.exports = {
 			);
 		}
 
-		client.firebase.entries.getOneEntry(args[0]).then(got => {
+		client.mongo.entries.getOneEntry(args[0]).then(got => {
 			if (!got) {
 				const embed = new MessageEmbed()
 					.setTitle('That entry does not exist.')

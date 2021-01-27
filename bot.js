@@ -2,18 +2,22 @@ const { Client, MessageEmbed, Collection } = require('discord.js');
 const client = new Client();
 const fs = require('fs');
 const Database = require('@replit/database');
-const db = new Database();
-client.firebase = require('./database/mongo');
+
+
+client.mongo = require('./database/mongo');
+
+const repldb = new Database();
+client.repldb = repldb;
 
 client.commands = new Collection();
-const bot = client;
 const commands = fs
 	.readdirSync('./commands')
 	.filter(file => file.endsWith('.js'));
-for (const file of commands) {
+
+commands.forEach(file => {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-}
+})
 
 const ids = [
 	'513864836279697411',
@@ -28,7 +32,7 @@ const blacklist = [];
 
 client.on('ready', async () => {
 	console.log(`i just stolen ${client.user.tag}'s identity lmao`);
-	client.firebase.connect(process.env.MONGO);
+	client.mongo.connect(process.env.MONGO);
 	client.user.setActivity('glitchdex.tk', { type: 'LISTENING' });
 });
 
@@ -70,7 +74,7 @@ client.on('message', async message => {
 				.setColor('RANDOM')
 		);
 	}
-	const blacklisted = await client.firebase.entries.checkBlacklist(
+	const blacklisted = await client.mongo.entries.checkBlacklist(
 		message.author.id
 	);
 	if (blacklisted === true) {

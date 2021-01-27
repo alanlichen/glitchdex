@@ -3,7 +3,7 @@ module.exports = {
 	category: 'Admin',
 	execute(client, message, args, MessageEmbed) {
 		(async () => {
-			await client.firebase.entries.removeEntry(args[0]);
+			await client.mongo.entries.removeEntry(args[0]);
 			// await client.db.delete(args[0]);
 			message.channel.send(
 				new MessageEmbed()

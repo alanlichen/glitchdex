@@ -10,7 +10,7 @@ module.exports = {
 					.setColor('RANDOM')
 			);
 		}
-		client.firebase.entries.removeLink(args[0]).then(res => {
+		client.mongo.entries.removeLink(args[0]).then(res => {
 			message.channel.send(
 				new MessageEmbed()
 					.setTitle('Entry unlinked!')

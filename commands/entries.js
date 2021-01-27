@@ -4,7 +4,7 @@ module.exports = {
   execute(client, message, args, MessageEmbed) {
     (async () => {
       // const entries = await client.db.list()
-      const entries = await client.firebase.entries.getAllEntries();
+      const entries = await client.mongo.entries.getAllEntries();
       let fields = [];
       let i=0
       entries.forEach(v => {

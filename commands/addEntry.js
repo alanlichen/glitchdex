@@ -7,7 +7,7 @@ module.exports = {
 			.split(' ')
 			.slice(2)
 			.join(' ');
-		await client.firebase.entries.addEntry(args[0], '' + value + '');
+		await client.mongo.entries.addEntry(args[0], '' + value + '');
 		let added = new MessageEmbed()
 			.setTitle('Operation complete!')
 			.setDescription(

@@ -24,7 +24,7 @@ module.exports = {
 					.setColor('RANDOM')
 			);
 		}
-		await client.firebase.entries.removeBlacklist(usrId);
+		await client.mongo.entries.removeBlacklist(usrId);
 		message.channel.send(
 			new MessageEmbed()
 				.setTitle('User was unblacklisted!')
